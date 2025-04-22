@@ -5,25 +5,26 @@ defaults:
 
 # Data configuration
 data:
-  train_data_path: data/hs_train_prefix.json  # To be specified by user
-  val_data_path: data/hs_val_prefix.json   # To be specified by user
+  train_data_path: data/apr_train_beam10_subbeam15_prefix.json
+  val_data_path: data/apr_val_prefix.json
   train_batch_size: 64
   eval_batch_size: 128
 
 # Model configuration
 model:
-  name: "Parallel-Reasoning/llama-hs"
-  server_url: "http://localhost:29215"
-  master_port: 45516
-  mem_fraction_static: 0.9
+  name: "Parallel-Reasoning/llama-apr-beam10_subbeam15"
+  server_url: "http://localhost:0"
+  master_port: 0
+  mem_fraction_static: 0.6
   gradient_checkpointing: true  # Enable gradient checkpointing to save memory
 
 # Rollout configuration
 rollout:
-  mode: "sos"
+  mode: "apr"
   sample_temperature: 1.0
-  eval_temperature: 0.5
+  eval_temperature: 0.0
   group_size: 5
+  condition_prefix: null
 
 # Training configuration
 training:
@@ -31,23 +32,23 @@ training:
   ppo_clip_ratio: 0.2
   num_steps: 150
   inner_steps: 2
-  kl_beta: 0.01
+  kl_beta: 0.001
   grad_clip: 1.0
   # This grad_accum_chunk_size is used for gradient accumulation
   # It is used to avoid OOM when the batch size is too large
   grad_accum_chunk_size: 4
   log_probs_chunk_size: 16
-  validate_per_steps: 25
-  # Number of validation samples to use (null for full validation set), set to 16 for testing, set to a larger number for actual validation
+  validate_per_steps: 50
+  # Number of validation samples to use (null for full validation set), set to 16 for testing (skipping validation), set to a larger number for actual validation
   val_samples: null
-  output_dir: checkpoints/hs
-  save_steps: 50
+  output_dir: checkpoints/apr
+  save_steps: 10
 
 # Logging configuration
 logging:
   verbose: false
-  wandb_project: "tinyrl"
-  wandb_name: "hs_grpo"
+  wandb_project: "tinyrl-apr"
+  wandb_name: "apr_grpo"
   log_interval: 1
   use_current_time: true
 

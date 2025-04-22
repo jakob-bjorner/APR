@@ -16,7 +16,7 @@ import hydra
 import torch.multiprocessing as mp
 from torch.utils.data import Dataset, DataLoader
 from rollout.sos_utils import rollout_sos
-from rollout.hsp_utils import rollout_hsp
+from rollout.apr_utils import rollout_apr
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from utils import popen_launch_server
 from sglang.srt.utils import init_custom_process_group
@@ -104,11 +104,11 @@ class GRPOTrainer:
         # Rollout 
         condition_prefix = config.rollout.condition_prefix
         if config.rollout.mode == "sos":
-            # sos and hs both use sos rollout function
+            # sos and sosp both use sos rollout function
             self.rollout_fn = rollout_sos
-        elif config.rollout.mode == "hsp":
-            # hsp uses hsp rollout function
-            self.rollout_fn = rollout_hsp
+        elif config.rollout.mode == "apr":
+            # apr uses apr rollout function
+            self.rollout_fn = rollout_apr
         else:
             raise ValueError(f"Rollout mode {config.rollout.mode} not supported")
         

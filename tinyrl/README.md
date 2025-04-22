@@ -10,7 +10,7 @@ pip install "sglang[all]>=0.4.3.post1" --find-links https://flashinfer.ai/whl/cu
 pip install hydra-core omegaconf wandb
 ```
 
-## For HSP, SGLang needs to be patched
+## For APR, SGLang needs to be patched
 Remove this check in `python/sglang/srt/managers/tokenizer_manager.py` in your local SGLang repo:
 ```
         # if (
@@ -32,35 +32,35 @@ Remove this check in `python/sglang/srt/managers/tokenizer_manager.py` in your l
 This file is at https://github.com/sgl-project/sglang/blob/45205d88a08606d5875476fbbbc76815a5107edd/python/sglang/srt/managers/tokenizer_manager.py#L350
 
 # Data Preparation
-Please put `hs_train_prefix.json`, `hs_val_prefix.json`, `hsp_train_beam10_subbeam15_prefix.json`, and `hsp_val_prefix.json` in the `data` folder.
+Please put `sosp_train_prefix.json`, `sosp_val_prefix.json`, `apr_train_beam10_subbeam15_prefix.json`, and `apr_val_prefix.json` in the `data` folder.
 
 You can download them from [https://huggingface.co/datasets/Parallel-Reasoning/apr_rl_data](https://huggingface.co/datasets/Parallel-Reasoning/apr_rl_data).
 
 # Run
 Each run requires two GPUs: one for model training and one for serving with SGLang.
 
-## RL on HSP without subcall condition
+## RL on APR without subcall condition
 ```
 export CUDA_VISIBLE_DEVICES=0,1
-python trainer.py --config-name hsp
+python trainer.py --config-name apr
 ```
 
-Reference checkpoint: [https://huggingface.co/Parallel-Reasoning/hsp_grpo](https://huggingface.co/Parallel-Reasoning/hsp_grpo)
+Reference checkpoint: [https://huggingface.co/Parallel-Reasoning/apr_grpo](https://huggingface.co/Parallel-Reasoning/apr_grpo)
 
-## RL on HSP with subcall condition (condition set to 10)
-```
-export CUDA_VISIBLE_DEVICES=0,1
-python trainer.py --config-name hsp_cond10
-```
-
-Reference checkpoint: [https://huggingface.co/Parallel-Reasoning/hsp_cond10_grpo](https://huggingface.co/Parallel-Reasoning/hsp_cond10_grpo)
-
-## RL on HS
+## RL on APR with subcall condition (condition set to 10)
 ```
 export CUDA_VISIBLE_DEVICES=0,1
-python trainer.py --config-name hs
+python trainer.py --config-name apr_cond10
 ```
 
-Reference checkpoint: [https://huggingface.co/Parallel-Reasoning/hs_grpo](https://huggingface.co/Parallel-Reasoning/hs_grpo)
+Reference checkpoint: [https://huggingface.co/Parallel-Reasoning/apr_cond10_grpo](https://huggingface.co/Parallel-Reasoning/apr_cond10_grpo)
+
+## RL on SOS+
+```
+export CUDA_VISIBLE_DEVICES=0,1
+python trainer.py --config-name sosp
+```
+
+Reference checkpoint: [https://huggingface.co/Parallel-Reasoning/sosp_grpo](https://huggingface.co/Parallel-Reasoning/sosp_grpo)
 
 You can set your own config files and specify different configs with `--config-name <config_name>`.

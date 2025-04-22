@@ -1,6 +1,6 @@
 """
 export CUDA_VISIBLE_DEVICES=7
-python -m sglang.launch_server --model-path LM-Parallel/llama-hsp-v3  --host localhost --served-model-name model 
+python -m sglang.launch_server --model-path LM-Parallel/llama-apr-v3  --host localhost --served-model-name model 
 """
 import re
 from transformers import AutoTokenizer
@@ -9,7 +9,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import sglang
 
 # Initialize tokenizer
-MODEL_NAME = "LM-Parallel/llama-hsp-v3"
+MODEL_NAME = "LM-Parallel/llama-apr-v3"
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 print(f"Tokenizer loaded for {MODEL_NAME}")
 
@@ -459,7 +459,7 @@ def process_single_prefix(prefix, server_url, bos_token, temperature=0.5):
         "is_correct": true_success
     }
 
-def rollout_hsp(server_url, prefix_list, bos_token, temperature=0.5, max_workers=32, condition_prefix=""
+def rollout_apr(server_url, prefix_list, bos_token, temperature=0.5, max_workers=32, condition_prefix=""
                 ):
     """
     Parallel implementation of rollout function using ThreadPoolExecutor

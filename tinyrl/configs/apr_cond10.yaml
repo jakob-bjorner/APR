@@ -5,14 +5,14 @@ defaults:
 
 # Data configuration
 data:
-  train_data_path: data/hsp_train_beam10_subbeam15_prefix.json
-  val_data_path: data/hsp_val_prefix.json
+  train_data_path: data/apr_train_beam10_subbeam15_prefix.json
+  val_data_path: data/apr_val_prefix.json
   train_batch_size: 64
   eval_batch_size: 128
 
 # Model configuration
 model:
-  name: "Parallel-Reasoning/llama-hsp-beam10_subbeam15_num_subcall_cond"
+  name: "Parallel-Reasoning/llama-apr-beam10_subbeam15_num_subcall_cond"
   server_url: "http://localhost:0"
   master_port: 0
   mem_fraction_static: 0.6
@@ -20,7 +20,7 @@ model:
 
 # Rollout configuration
 rollout:
-  mode: "hsp"
+  mode: "apr"
   sample_temperature: 1.0
   eval_temperature: 1.0
   group_size: 5
@@ -42,14 +42,14 @@ training:
   validate_per_steps: 50
   # Number of validation samples to use (null for full validation set), set to 16 for testing, set to a larger number for actual validation
   val_samples: 16
-  output_dir: checkpoints/hsp
+  output_dir: checkpoints/apr
   save_steps: 10
 
 # Logging configuration
 logging:
   verbose: false
-  wandb_project: "tinyrl-hsp"
-  wandb_name: "hsp_cond10_grpo"
+  wandb_project: "tinyrl-apr"
+  wandb_name: "apr_cond10_grpo"
   log_interval: 1
   use_current_time: true
 

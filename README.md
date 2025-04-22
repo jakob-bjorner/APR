@@ -39,7 +39,7 @@ We use TPU-v3-128 for supervised training with a codebase building upon [JAX_lla
 Please refer to [the instructions](supervised-jax/README.md) for more details.
 
 ## Reinforcement Learning
-We present TinyRL, a simple implementation of the GRPO training framework for our experiments. TinyRL is a lightweight yet highly performant reinforcement learning library designed to be both easy to use and extend. It integrates with [SGLang](https://github.com/sgl-project/sglang) for efficient rollout.
+We present TinyRL, a simple implementation of the GRPO training framework for our experiments. TinyRL is a lightweight yet performant reinforcement learning library designed to be both easy to use and extend. It integrates with [SGLang](https://github.com/sgl-project/sglang) for efficient rollout. Given the small size of the model we’re training, we haven’t implemented model parallelism, so it runs on two GPUs—one for training and one for rollout
 
 It supports asynchronous, multi-turn, multi-agent rollouts through a general `rollout_fun` interface, with the minimal assumption that your rollout mechanism relies on calling an OpenAI-compatible API endpoint. 
 ```python

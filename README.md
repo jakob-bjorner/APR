@@ -52,6 +52,31 @@ Please refer to [the instructions](tinyrl/README.md) for more details.
 
 ## Evaluation
 
+### SoS+
+
+The following command evaluates the SoS+ model on the validation set.
+```bash
+python -m src.eval.eval_sosp --ckpt <ckpt>  --temperature <temperature> --batch_size 256 --gens 1 --output_dir <output_dir> --num_gpus 8 --n_samples <n_samples> --budget <budget>
+```
+Where `<n_samples>` is the number of Best-of-N samples in inference, and `<budget>` is the budget for conditional generation (leave it empty if not using conditioned models). For instance, the following command evaluates the SoS+ model with 8 samples using a unconditioned checkpoint.
+```bash
+python -m src.eval.eval_sosp --ckpt Parallel-Reasoning/llama-sosp --temperature 1.0 --batch_size 256 --gens 1 --output_dir results/llama-sosp/ --num_gpus 8 --n_samples 8
+```
+
+### APR
+
+First, you need to start the SGLang server for the target model. For instance:
+```bash
+python -m sglang.launch_server  --served-model-name model --model-path Parallel-Reasoning/llama-apr_cond10_grpo --port 2346 --dp-size 8
+```
+
+Then the following command evaluates the APR model on the validation set.
+```bash
+python -m src.eval.eval_apr --model_name llama-apr_cond10_grpo --ckpt Parallel-Reasoning/llama-apr_cond10_grpo --temperature 1.0 --budget 10 --use_subcall_cond
+```
+which evaluates the APR model with a budget of 10 child threads and uses child thread count conditioning. Do not use `--budget` and `--use_subcall_cond` for unconditioned models.
+
+
 ## Citation
 If you find this work useful in your research, please consider citing:
 

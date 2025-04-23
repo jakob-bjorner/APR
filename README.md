@@ -52,6 +52,28 @@ Please refer to [the instructions](tinyrl/README.md) for more details.
 
 ## Evaluation
 
+> [!IMPORTANT]
+> ### For evaluation, SGLang needs to be patched
+> Remove this check in `python/sglang/srt/managers/tokenizer_manager.py` in your local SGLang repo:
+> ```
+> # if (
+> #     obj.sampling_params.get("max_new_tokens") is not None
+> #     and obj.sampling_params.get("max_new_tokens") + input_token_num
+> #     >= self.context_len
+> # ):
+> #     raise ValueError(
+> #         f"Requested token count exceeds the model's maximum context length "
+> #         f"of {self.context_len} tokens. You requested a total of "
+> #         f"{obj.sampling_params.get('max_new_tokens') + input_token_num} "
+> #         f"tokens: {input_token_num} tokens from the input messages and "
+> #         f"{obj.sampling_params.get('max_new_tokens')} tokens for the "
+> #         f"completion. Please reduce the number of tokens in the input "
+> #         f"messages or the completion to fit within the limit."
+> #     )
+> ```
+> 
+> This file is located at [tokenizer_manager.py](https://github.com/sgl-project/sglang/blob/45205d88a08606d5875476fbbbc76815a5107edd/python/sglang/srt/managers/tokenizer_manager.py#L350)
+
 ### SoS+
 
 The following command evaluates the SoS+ model on the validation set.

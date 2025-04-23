@@ -53,3 +53,13 @@ Please refer to [the instructions](tinyrl/README.md) for more details.
 ## Evaluation
 
 ## Citation
+If you find this work useful in your research, please consider citing:
+
+```bibtex
+@article{pan2025learning,
+  title   = {Learning Adaptive Parallel Reasoning with Language Models},
+  author  = {Jiayi Pan and Xiuyu Li and Long Lian and Charlie Snell and Yifei Zhou and Adam Yala and Trevor Darrell and Kurt Keutzer and Alane Suhr},
+  year    = {2025},
+  journal = {arXiv preprint arXiv: 2504.15466}
+}
+```

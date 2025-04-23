@@ -53,7 +53,7 @@ Please refer to [the instructions](tinyrl/README.md) for more details.
 ## Evaluation
 
 > [!IMPORTANT]
-> ### For evaluation, SGLang needs to be patched
+> **For evaluation, SGLang needs to be patched**.
 > Remove this check in `python/sglang/srt/managers/tokenizer_manager.py` in your local SGLang repo:
 > ```
 > # if (
@@ -73,6 +73,9 @@ Please refer to [the instructions](tinyrl/README.md) for more details.
 > ```
 > 
 > This file is located at [tokenizer_manager.py](https://github.com/sgl-project/sglang/blob/45205d88a08606d5875476fbbbc76815a5107edd/python/sglang/srt/managers/tokenizer_manager.py#L350)
+
+> [!Note]
+> sgl-project/sglang#3721 introduces an `--allow-auto-truncate` option that makes this patch unnecessary. Once merged, you can use that directly.
 
 ### SoS+
 

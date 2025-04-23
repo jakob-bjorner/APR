@@ -1,4 +1,4 @@
-<h1 align="center"> Learning Adaptive Parallel Reasoning with Language Models </h1>
+<h1 align="center"> Learning Adaptive Parallel Reasoning <br> with Language Models </h1>
 
 <p align="center">
   <a href="https://www.jiayipan.com/" style="text-decoration: none;">Jiayi Pan</a><sup>*</sup>,

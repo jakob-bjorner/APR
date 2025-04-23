@@ -17,7 +17,7 @@
 </p>
 
 <p align="center">
-<a href="./assets/apr-paper.pdf">📃 Paper</a>
+<a href="https://arxiv.org/abs/2504.15466">📃 Paper</a>
 •
 <a href="https://github.com/Parallel-Reasoning/APR" >💻 Code</a>
 •
